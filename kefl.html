@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+
+    <title>课程分类</title>
+    <link rel="stylesheet" href="assets/css/amazeui.flat.min.css">
+</head>
+<body>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default">
+    <!--列表标题-->
+    <div class="am-list-news-hd am-cf">
+        <!--带更多链接-->
+        <a href="#" class="">
+
+            <h2>栏目标题</h2>
+        </a>
+    </div>
+
+    <div class="am-list-news-bd">
+        <ul class="am-list">
+
+        </ul>
+    </div>
+
+
+    <div class="am-list-news-ft">
+        <a class="am-list-news-more am-btn am-btn-default " href="###">查看更多 &raquo;</a>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script>
+    $(function () {
+        //id用来识别每一页不一样
+        var id = location.href.split('=')[1]
+        $.get('https://www.whphp.com/api/lesson_list', {cid :id }, function (data) {
+            console.log(data)
+
+            $.each(data,function (key,value) {
+                var html='' +
+                    '            <li class="am-g">' +
+                    '                <a href="kexq.html?id='+value.id+'" class="am-list-item-hd ">'+value.title+'</a>' +
+                    '' +
+                    '' +
+                    '            </li>'
+                $(".am-list-news-bd .am-list").append(html);
+            })
+
+
+        }, 'json');
+
+
+    })
+
+
+</script>
+</body>
+</html>

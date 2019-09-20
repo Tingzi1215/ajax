@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+    <title>首页</title>
+    <link rel="stylesheet" href="assets/css/amazeui.flat.min.css">
+</head>
+
+
+<body>
+<ul class="am-list admin-sidebar-list my-list" id="collapase-nav-1">
+
+
+</ul>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script>
+    $.get("https://www.whphp.com/api/lesson ", {}, function (data) {
+        console.log(data)//获取后端数据
+        //键名，键值一定不能忘记，each循环
+        $.each(data, function (key, value) {
+
+            var html = ' <li class="am-panel">' +
+                '        <a class="active">' +
+                '            <i class="am-icon-users am-margin-left-sm"></i>' + value.name + ' <i class="am-icon-angle-right am-fr am-margin-right"></i>' +
+                '        </a>' +
+                '        <ul class="am-list am-collapse admin-sidebar-sub" id="user-nav">'
+
+
+            $.each(value.child, function (k, v) {
+                html += '            <li><a href="kefl.html?id='+v.id+'"><i class="am-icon-user am-margin-left-sm"></i>' + v.name + '</a></li>'
+            })
+
+            html += '        </ul>' +
+                '    </li>'
+            $(".my-list").append(html);//将新的html发送到指定位置
+
+        })
+//js里面的时间触发格式
+        $(document).on("click", ".active", function () {
+            $(this).next("ul").slideToggle();
+            $(this).parents("li").siblings().children("ul").slideUp();
+            // console.log($(this).parents("li").siblings().children("ul"))
+
+        })
+    }, "json");
+
+
+</script>
+</body>
+</html>

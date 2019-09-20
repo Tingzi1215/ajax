@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+
+    <title>课程详情</title>
+    <link rel="stylesheet" href="assets/css/amazeui.flat.min.css">
+</head>
+<body>
+<h1 class="title"></h1>
+
+<p class="am-serif"></p>
+
+
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script>
+    $(function () {
+        //id用来识别跳转的每一页不一样
+        var id = location.href.split('=')[1];
+        $.get('https://www.whphp.com/api/lesson_show', {lesson_id: id}, function (data) {
+            console.log(data)
+            var title = data.title;//获取数据里的title
+            var content = data.markdown_html_code;
+            //对象和数组不同  可以直接读 不需要循环 所以这里我就用一个变量content把读出来的 data里面mark字段  装起来
+            $(".title").text(title);
+            $(".am-serif").html(content);
+
+
+        }, 'json');
+
+
+    })
+
+</script>
+</body>
+</html>
